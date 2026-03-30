@@ -1,0 +1,31 @@
+/* General page style */
+body {
+    font-family: Arial;
+    padding: 20px;
+  }
+  
+  /* Search area spacing */
+  .search-container {
+    margin-bottom: 20px;
+  }
+  
+  /* Basic style for input, select and button */
+  input, select, button {
+    padding: 8px;
+    margin-right: 10px;
+  }
+  
+  /* Result box style */
+  #result {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  /* Flashcard basic style */
+  .flashcard {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+  }
