@@ -49,9 +49,11 @@ async function searchWord() {
 
     const data = await response.json();
 
-    console.log(data);
+    console.log("API data:", data);
 
     const entry = data[0];
+    console.log("Entry:", entry);
+
     const foundWord = entry.word || word;
 
     const phonetic =
@@ -60,6 +62,9 @@ async function searchWord() {
       "Not available";
 
     const firstMeaning = entry.meanings && entry.meanings[0];
+    console.log("Meanings:", entry.meanings);
+    console.log("First meaning:", firstMeaning);
+    
     const partOfSpeech = firstMeaning?.partOfSpeech || "Not available";
 
     const firstDefinition = firstMeaning?.definitions && firstMeaning.definitions[0];
@@ -83,7 +88,6 @@ input.addEventListener("keydown", function (event) {
   }
 });
 
-console.log(data);
 
 //notes: 
 //testing result: not so ideal. 
