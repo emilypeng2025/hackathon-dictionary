@@ -17,4 +17,4 @@ A web application that allows users to search for English words and Hebrew words
 - LocalStorage
 
 ## Status
-Day 1: UI + mock data complete
+Day 1: UI + mock data complete (Free Dictionary API)
