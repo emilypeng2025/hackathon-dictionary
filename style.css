@@ -1,31 +1,229 @@
-/* General page style */
+/* Reset & base */
+* {
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial;
-    padding: 20px;
+  font-family: -apple-system, 'SF Pro Display', 'Inter', sans-serif;
+  background: #F2F2F7;
+  padding: 32px 24px;
+  color: #1C1C1E;
+}
+
+/* Page title */
+h1 {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+p.subtitle {
+  font-size: 14px;
+  color: #8E8E93;
+  margin-bottom: 24px;
+}
+
+/* Search row */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Search input wrapper (for the icon) */
+.input-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.input-wrap::before {
+  content: "⌕";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8E8E93;
+  font-size: 17px;
+  pointer-events: none;
+}
+
+/* Shared form element base */
+input,
+select,
+button {
+  height: 44px;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  border: 0.5px solid rgba(60, 60, 67, 0.18);
+  margin: 0;
+}
+
+/* Input */
+input[type="text"] {
+  width: 100%;
+  background: #FFFFFF;
+  padding: 0 14px 0 38px;
+  color: #1C1C1E;
+}
+
+input[type="text"]::placeholder {
+  color: #8E8E93;
+}
+
+input[type="text"]:focus {
+  border-color: #007AFF;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+}
+
+/* Language select */
+select {
+  background: #FFFFFF;
+  padding: 0 12px;
+  min-width: 110px;
+  color: #1C1C1E;
+  cursor: pointer;
+  -webkit-appearance: auto;
+}
+
+/* Search button */
+button.search-btn {
+  background: #5856D6;
+  color: #FFFFFF;
+  font-weight: 500;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  letter-spacing: -0.1px;
+  transition: opacity 0.15s;
+}
+
+button.search-btn:active {
+  opacity: 0.8;
+}
+
+/* Result box */
+#result {
+  background: #FFFFFF;
+  border: 0.5px solid rgba(60, 60, 67, 0.12);
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  min-height: 90px;
+  font-size: 15px;
+  color: #1C1C1E;
+  line-height: 1.6;
+}
+
+/* Tab buttons (History / Flashcards) */
+.tab-btn {
+  height: 36px;
+  background: #FFFFFF;
+  border: 0.5px solid rgba(60, 60, 67, 0.2);
+  border-radius: 10px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #3C3C43;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+  background: #5856D6;
+  color: #FFFFFF;
+  border-color: transparent;
+}
+
+/* Flashcard */
+.flashcard {
+  background: #FFFFFF;
+  border: 0.5px solid rgba(60, 60, 67, 0.12);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 8px 0;
+  cursor: pointer;
+  font-size: 15px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.flashcard:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  body {
+    background: #1C1C1E;
+    color: #FFFFFF;
   }
-  
-  /* Search area spacing */
-  .search-container {
-    margin-bottom: 20px;
+
+  input[type="text"] {
+    background: #2C2C2E;
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.12);
   }
-  
-  /* Basic style for input, select and button */
-  input, select, button {
-    padding: 8px;
-    margin-right: 10px;
+
+  input[type="text"]::placeholder {
+    color: #636366;
   }
-  
-  /* Result box style */
+
+  input[type="text"]:focus {
+    border-color: #5856D6;
+    box-shadow: 0 0 0 3px rgba(88, 86, 214, 0.2);
+  }
+
+  select {
+    background: #2C2C2E;
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  input,
+  select,
+  button {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
   #result {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 10px;
+    background: #2C2C2E;
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.08);
   }
-  
-  /* Flashcard basic style */
+
+  .tab-btn {
+    background: #2C2C2E;
+    color: #EBEBF5;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .tab-btn.active,
+  .tab-btn:hover {
+    background: #5856D6;
+    color: #FFFFFF;
+    border-color: transparent;
+  }
+
   .flashcard {
-    border: 1px solid black;
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
+    background: #2C2C2E;
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.08);
   }
+
+  .flashcard:hover {
+    box-shadow: 0 4px 16px rgba(88, 86, 214, 0.15);
+  }
+
+  .input-wrap::before {
+    color: #636366;
+  }
+
+  p.subtitle {
+    color: #636366;
+  }
+
+}

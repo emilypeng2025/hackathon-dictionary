@@ -11,30 +11,32 @@
 <body>
 
   <!-- Main title -->
-  <h1>Dictionary + Hebrew</h1>
-  <p>This is an app</p>
+  <h1>Dictionary</h1>
+  <p class="subtitle">English · Hebrew</p>
   <!-- Search section: input + mode + button -->
   <div class="search-container">
-    <input id="wordInput" type="text" placeholder="Enter a word" />
+    <!-- New change here -->
+    <div class="input-wrap">
+      <input id="wordInput" type="text" placeholder="Enter a word" />
+    </div>
 
     <select id="modeSelect">
       <option value="en">English</option>
       <option value="he">Hebrew</option>
     </select>
 
-    <button id="searchBtn">Search</button>
+    <button id="searchBtn" class="search-btn">Search</button>
   </div>
 
   <!-- Result Section -->
   <div id="result"></div>
 
   <!-- History -->
-  <h2>Search History</h2>
-  <ul id="historyList"></ul>
+  <button id="historyList" class="tab-btn active">Search History</button>
 
   <!-- Flashcards -->
-  <h2>Flashcards</h2>
-  <div id="flashcards"></div>
+  <button id="flashcards" class="tab-btn">Flashcards</button>
+
 
   <script src="app.js"></script>
 </body>
