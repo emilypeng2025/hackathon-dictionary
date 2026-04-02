@@ -31,12 +31,25 @@
   <!-- Result Section -->
   <div id="result"></div>
 
-  <!-- History -->
-  <button id="historyList" class="tab-btn active">Search History</button>
+  <!-- Tabs -->
+  <div class="tabs">
+    <button id="historyTab" class="tab-btn active">Search History</button>
+    <button id="flashcardsTab" class="tab-btn">Flashcards</button>
+  </div>
 
-  <!-- Flashcards -->
-  <button id="flashcards" class="tab-btn">Flashcards</button>
+  <!-- History Section -->
+  <div id="historySection">
+    <h2>Search History</h2>
+    <button id="clearHistoryBtn">Clear History</button>
+    <ul id="historyList"></ul>
+  </div>
 
+  <!-- Flashcards Section -->
+  <div id="flashcardsSection" style="display: none;">
+    <h2>Flashcards</h2>
+    <button id="clearFlashcardsBtn">Clear Flashcards</button>
+    <div id="flashcards"></div>
+  </div>
 
   <script src="app.js"></script>
 </body>
