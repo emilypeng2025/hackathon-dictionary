@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "strict": true,
+    "lib": [
+      "dom",
+      "es2017"
+    ]
+  }
+}
