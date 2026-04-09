@@ -1,4 +1,6 @@
 "use strict";
+
+// ---------- DOM Elements ----------
 function getRequiredElement(id) {
   const element = document.getElementById(id);
   if (!element) {
@@ -63,7 +65,7 @@ const fakeDictionary = {
   }
 };
 
-// LocalStorage keys
+// ---------- LocalStorage keys ----------
 const HISTORY_KEY = "searchHistory";
 const FLASHCARDS_KEY = "flashcards";
 
@@ -141,10 +143,6 @@ function getFlashcards() {
     return [];
   }
 }
-// 	•	tries to parse JSON safely
-	// •	if JSON is broken → catches error
-	// •	prevents app from crashing
-	// •	returns empty array instead
 
 function saveFlashcard(card) {
   let flashcards = getFlashcards();
@@ -172,11 +170,6 @@ function deleteFlashcard(index) {
   localStorage.setItem(FLASHCARDS_KEY, JSON.stringify(flashcards));
   renderFlashcards();
 }
-// 它做了三件事：
-	// •	先拿现有 flashcards
-	// •	删除指定 index
-	// •	存回 localStorage
-	// •	再刷新画面
 
 function clearHistory() {
   localStorage.removeItem(HISTORY_KEY);
@@ -187,10 +180,6 @@ function clearFlashcards() {
   localStorage.removeItem(FLASHCARDS_KEY);
   renderFlashcards();
 }
-
-// 以上属于“存储层”
-// 以下从 renderFlashcards() 开始，进入“渲染层”
-
 
 function renderFlashcards() {
   const flashcards = getFlashcards();
@@ -231,11 +220,6 @@ function renderFlashcards() {
     });
   });
 }
-// 	•	用你的 getFlashcards() 读取 localStorage
-	// •	用新的 flashcardsList
-	// •	用他的新 UI class
-	// •	兼容 tag 和 language
-	// •	delete button 也和新 CSS 一致
 
 // ---------- Render Options ----------
 
@@ -323,13 +307,6 @@ function renderSelectedResult(data, language, allOptions) {
     });
   }
 }
-// 新增的函数renderSelectedResult作用是：
-// •	点击某个 option 后
-// •	显示最终选中的那张 card
-// •	可以 Add to Flashcards
-// •	可以 Back to Options
-
-
 
 // ---------- Search ----------
 function getTagFromPartOfSpeech(partOfSpeech) {
@@ -353,8 +330,8 @@ function renderNotFound(word) {
 }
 
 async function searchWord() {
-const word = input.value.trim();
-const language = modeSelect.value;
+  const word = input.value.trim();
+  const language = modeSelect.value;
 
 if (!word) {
   renderError("Please enter a word.");
@@ -495,19 +472,4 @@ clearFlashcardsBtn.addEventListener("click", function () {
 // ---------- Initial Page Load ----------
 renderHistory();
 renderFlashcards();
-
-
-
-// 现在这份已经包含：
-	// •	更安全的 DOM 获取
-	// •	English + Hebrew mode
-	// •	localStorage for history
-	// •	localStorage for flashcards
-	// •	新 UI render
-	// •	option selection
-	// •	add to flashcards
-	// •	delete flashcards
-	// •	clear history / flashcards
-	// •	tab switching
-	// •	page load restore
 

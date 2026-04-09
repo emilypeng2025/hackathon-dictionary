@@ -1,9 +1,18 @@
 # Dictionary App — English & Hebrew
+🚀 A learning-focused dictionary app with selectable meanings and flashcard support
+
+🔗 Demo Video: https://www.loom.com/share/199add51732b409e9e697af5bc032094
+
+---
 
 ## Overview
-This project is a bilingual dictionary web app built with **HTML**, **CSS**, and **TypeScript**. It allows users to search for words in **English** and **Hebrew**, view structured definitions and translations, save selected results as flashcards, and review recent search history.
+This project is a bilingual dictionary web app built with **HTML**, **CSS**, and **JavaScript(with TypeScript configuration)**. It allows users to search for words in **English** and **Hebrew**, view structured definitions and translations, save selected results as flashcards, and review recent search history.
 
-The app integrates a real API for English results and uses mock data for Hebrew, while maintaining a consistent internal data structure across both languages.
+The app integrates a real API for English results and uses a local mock dictionary for Hebrew, while maintaining a consistent internal data structure across both languages.
+
+The app focuses on improving learning efficiency by allowing users to select the most relevant meaning instead of passively viewing definitions.
+
+---
 
 ## Features
 
@@ -19,7 +28,9 @@ The app integrates a real API for English results and uses mock data for Hebrew,
 - Delete individual flashcards or clear all saved data
 - Responsive and polished UI with hover effects, rounded cards, and dark mode support
 
-## How it works
+---
+
+## How It Works
 
 1. The user enters a word in the search bar and selects a language mode (**English** or **Hebrew**).
 2. In **English mode**, the app sends a request to the Free Dictionary API and retrieves structured data.
@@ -30,6 +41,8 @@ The app integrates a real API for English results and uses mock data for Hebrew,
 7. The selected result can be saved as a flashcard using local storage.
 8. Search history is automatically stored and displayed.
 9. The user can switch between **History** and **Flashcards** tabs, delete items, or clear all data.
+
+---
 
 ## Project Structure
 
@@ -106,6 +119,8 @@ type DictionaryEntry = {
 - **TypeScript** – application logic and type safety
 - **Free Dictionary API** – external data source for English definitions
 - **DOM Manipulation** – dynamic rendering and user interaction
+- **Fetch API** – asynchronous data retrieval
+- **LocalStorage API** – client-side persistence
 
 
 ## Status

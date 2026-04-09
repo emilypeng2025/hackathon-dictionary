@@ -9,12 +9,9 @@
 </head>
 
 <body>
-
-  <!-- Main title -->
   <h1>Dictionary</h1>
   <p class="subtitle">English · Hebrew</p>
 
-  <!-- Search section: input + mode + button -->
   <div class="search-container">
     <div class="input-wrap">
       <input id="wordInput" type="text" placeholder="Enter a word" />
@@ -28,20 +25,15 @@
     <button id="searchBtn" class="search-btn">Search</button>
   </div>
 
-  <!-- Result Section -->
   <div id="result">
     <p class="empty-state">Search for a word to see the result.</p>
-    <!-- this new p tag是 UX 优化: 这是一个 默认占位内容（placeholder / empty state）
-     当用户搜索时：JS 一般会这样用: result.innerHTML = "真正的结果": 这行 <p> 会被覆盖掉 -->
   </div>
 
-  <!-- Tabs -->
   <div class="tabs">
     <button id="historyTab" class="tab-btn active">Search History</button>
     <button id="flashcardsTab" class="tab-btn">Flashcards</button>
   </div>
 
-  <!-- History Section -->
   <div id="historySection">
     <div class="section-header">
       <h2>Search History</h2>
@@ -50,35 +42,8 @@
     <ul id="historyList"></ul>
   </div>
 
-  <!-- Flashcards Section -->
   <div id="flashcardsSection" style="display: none;">
     <div class="section-header">
-      <!-- what is section-header?  不是 HTML 标准标签,是一个 CSS class（样式钩子）:“这一块是一个 section 的头部”: 加了之后可以这样写 CSS：.section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        }效果： Search History         [Clear]
-        结构更清晰,更容易做布局, 是前端标准写法
-        what is this line? class="small-btn" 是什么？ 这是为了 按钮样式统一 + 区分大小, 通常 CSS 会这样写：
-        button {
-          padding: 10px 20px;
-        }
-
-        .small-btn {
-          padding: 5px 10px;
-          font-size: 12px;
-        }
-          有两种按钮：
-
-        大按钮（主操作）
-          •	Search
-          •	Add Flashcard
-
-        小按钮（辅助操作）
-          •	Clear History
-          •	Delete
-        UI 层级更清楚, 更专业
-        -->
       <h2>Flashcards</h2>
       <button id="clearFlashcardsBtn" class="small-btn">Clear Flashcards</button>
     </div>
