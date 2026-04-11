@@ -22,6 +22,7 @@ const flashcardsList = getRequiredElement("flashcardsList");
 const clearHistoryBtn = getRequiredElement("clearHistoryBtn");
 const clearFlashcardsBtn = getRequiredElement("clearFlashcardsBtn");
 
+
 const fakeDictionary = {
   שלום: {
       word: "שלום",
@@ -221,6 +222,15 @@ function renderFlashcards() {
   });
 }
 
+async function getTechTerms(word) {
+  const response = await fetch("./techTerms.json");
+  const data = await response.json();
+
+  const normalizedWord = word.toLowerCase();
+
+  return data.filter(item => item.word.toLowerCase() === normalizedWord);
+}
+
 // ---------- Render Options ----------
 
 function renderOptions(options, language) {
@@ -333,101 +343,116 @@ async function searchWord() {
   const word = input.value.trim();
   const language = modeSelect.value;
 
-if (!word) {
-  renderError("Please enter a word.");
-  return;
-}
-
-resultDiv.innerHTML = `<p class="empty-state">Loading...</p>`;
-
-try {
-  let options = [];
-
-  if (language === "en") {
-    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-
-    if (!response.ok) {
-      renderNotFound(word);
-      saveHistory(word, language);
-      renderHistory();
-      return;
-    }
-
-    const data = await response.json();
-    const entry = data[0];
-
-    if (!entry || !entry.meanings) {
-      renderNotFound(word);
-      saveHistory(word, language);
-      renderHistory();
-      return;
-    }
-
-    const foundWord = entry.word || word;
-
-    const phonetic =
-      entry.phonetic ||
-      (entry.phonetics && entry.phonetics.find((p) => p.text)?.text) ||
-      "";
-
-    for (let i = 0; i < entry.meanings.length; i++) {
-      const meaning = entry.meanings[i];
-
-      if (!meaning.definitions) continue;
-
-      for (let j = 0; j < meaning.definitions.length; j++) {
-        if (options.length >= 3) break;
-
-        const def = meaning.definitions[j];
-
-        options.push({
-          word: foundWord,
-          phonetic: phonetic,
-          partOfSpeech: meaning.partOfSpeech || "Not available",
-          definition: def.definition || "Not available",
-          example: def.example || "No example available",
-          tag: getTagFromPartOfSpeech(meaning.partOfSpeech || "")
-        });
-      }
-
-      if (options.length >= 3) break;
-    }
-  } else {
-    const normalizedWord = word.toLowerCase();
-    const foundWord = fakeDictionary[word] || fakeDictionary[normalizedWord];
-
-    if (foundWord) {
-      options = [
-        foundWord,
-        {
-          ...foundWord,
-          definition: `${foundWord.definition} (common use)`,
-          tag: "general"
-        },
-        {
-          ...foundWord,
-          definition: `${foundWord.definition} (formal use)`,
-          tag: "formal"
-        }
-      ];
-    }
-  }
-
-  if (options.length === 0) {
-    renderNotFound(word);
-    saveHistory(word, language);
-    renderHistory();
+  if (!word) {
+    renderError("Please enter a word.");
     return;
   }
 
-  saveHistory(word, language);
-  renderHistory();
-  renderOptions(options, language);
+  resultDiv.innerHTML = `<p class="empty-state">Loading...</p>`;
 
-} catch (error) {
-  console.error("Search error:", error);
-  renderError("Sorry, could not find that word.");
-}
+  try {
+    let options = [];
+
+    if (language === "en") {
+
+      // 🟢 Tech JSON first
+      const techOptions = await getTechTerms(word);
+
+      if (techOptions.length > 0) {
+        options = techOptions;
+
+      } else {
+
+        // 🟡 Free Dictionary API
+        const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+
+        if (!response.ok) {
+          renderNotFound(word);
+          saveHistory(word, language);
+          renderHistory();
+          return;
+        }
+
+        const data = await response.json();
+        const entry = data[0];
+
+        if (!entry || !entry.meanings) {
+          renderNotFound(word);
+          saveHistory(word, language);
+          renderHistory();
+          return;
+        }
+
+        const foundWord = entry.word || word;
+
+        const phonetic =
+          entry.phonetic ||
+          (entry.phonetics && entry.phonetics.find((p) => p.text)?.text) ||
+          "";
+
+        for (let i = 0; i < entry.meanings.length; i++) {
+          const meaning = entry.meanings[i];
+
+          if (!meaning.definitions) continue;
+
+          for (let j = 0; j < meaning.definitions.length; j++) {
+            if (options.length >= 3) break;
+
+            const def = meaning.definitions[j];
+
+            options.push({
+              word: foundWord,
+              phonetic: phonetic,
+              partOfSpeech: meaning.partOfSpeech || "Not available",
+              definition: def.definition || "Not available",
+              example: def.example || "No example available",
+              tag: getTagFromPartOfSpeech(meaning.partOfSpeech || "")
+            });
+          }
+
+          if (options.length >= 3) break;
+        }
+      }
+
+    } else {
+
+      // 🔵 Hebrew logic (separate!)
+      const normalizedWord = word.toLowerCase();
+      const foundWord = fakeDictionary[word] || fakeDictionary[normalizedWord];
+
+      if (foundWord) {
+        options = [
+          foundWord,
+          {
+            ...foundWord,
+            definition: `${foundWord.definition} (common use)`,
+            tag: "general"
+          },
+          {
+            ...foundWord,
+            definition: `${foundWord.definition} (formal use)`,
+            tag: "formal"
+          }
+        ];
+      }
+    }
+
+    // 🔽 Common logic (outside both branches)
+    if (options.length === 0) {
+      renderNotFound(word);
+      saveHistory(word, language);
+      renderHistory();
+      return;
+    }
+
+    saveHistory(word, language);
+    renderHistory();
+    renderOptions(options, language);
+
+  } catch (error) {
+    console.error("Search error:", error);
+    renderError("Sorry, could not find that word.");
+  }
 }
 
 // ---------- Events ----------

@@ -1,0 +1,20 @@
+[
+    {
+      "word": "API",
+      "phonetic": "/ˌeɪ.piːˈaɪ/",
+      "partOfSpeech": "noun",
+      "definition": "A tool that lets different software programs communicate with each other.",
+      "example": "The app that Xiao and Jingwen made uses an API to get word information.",
+      "tag": "tech",
+      "language": "en"
+    },
+    {
+      "word": "Python",
+      "phonetic": "/ˈpaɪ.θɑːn/",
+      "partOfSpeech": "noun",
+      "definition": "A popular programming language used in web development, data science, and AI.",
+      "example": "We used Python to train the model.",
+      "tag": "programming",
+      "language": "en"
+    }
+]
